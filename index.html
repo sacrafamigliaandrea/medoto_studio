@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Atlante dei Metodi di Studio · Scuola Sacra Famiglia</title>
+<link rel="icon" href="logo.svg">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PALETTE DEDICATA ALLO STUDIO
+   Indaco (concentrazione) · Salvia-teal (memoria) · Oro (merito)
+   su carta calda. Distinta dal blu istituzionale e dal verde.
+   ============================================================ */
+:root{
+  --paper:#F6F2EA; --paper2:#EFE8DB; --card:#FFFFFF;
+  --ink:#282647; --text:#282647; --muted:#615E86; --light:#A29EC0;
+  --muted2:#6E6B92;
+  --indigo:#463C97; --indigo2:#5A4EC2; --indigoD:#2E2668; --indigoL:rgba(70,60,151,.07);
+  --sage:#2A8578; --sage2:#33A092; --sageD:#1E6156; --sageL:rgba(42,133,120,.10);
+  --gold:#B8860B; --gold2:#D4A017; --goldL:rgba(184,134,11,.11);
+  --warn:#B8860B; --warnL:rgba(184,134,11,.13);
+  --brd:#E4DCCC; --brd2:#D2C7B1;
+  --shadow:0 4px 20px rgba(46,38,104,.08);
+  --shadow2:0 8px 30px rgba(46,38,104,.12);
+  --head:'Lexend',sans-serif;
+  --body:'Atkinson Hyperlegible',Helvetica,Arial,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);font-size:18px;line-height:1.65;color:var(--text);
+  background:
+    radial-gradient(1200px 500px at 15% -8%, rgba(90,78,194,.08), transparent 60%),
+    radial-gradient(1000px 460px at 100% 0%, rgba(42,133,120,.07), transparent 55%),
+    var(--paper);
+  background-repeat:no-repeat}
+h1,h2,h3,h4{font-family:var(--head);color:var(--indigoD);line-height:1.24}
+p{max-width:72ch}
+button{font-family:var(--head);cursor:pointer}
+:focus-visible{outline:3px solid var(--gold2);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+img{max-width:100%;display:block}
+
+/* ---------- Header ---------- */
+header{background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border-bottom:1px solid var(--brd)}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;flex-wrap:wrap}
+.brand{display:inline-flex;align-items:center;gap:12px}
+.brand-logo{height:46px;width:auto}
+.brand-txt{display:flex;flex-direction:column;line-height:1.2}
+.brand-name{font-family:var(--head);font-size:14px;font-weight:700;letter-spacing:.6px;color:var(--indigo);text-transform:uppercase}
+.brand-role{font-family:var(--head);font-size:11.5px;font-weight:500;letter-spacing:.2px;color:var(--muted)}
+.btn-docenti{background:none;border:1.5px solid var(--brd2);color:var(--indigo);border-radius:999px;padding:8px 18px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.btn-docenti:hover{background:var(--indigoL);border-color:var(--indigo2)}
+
+/* ---------- Hero ---------- */
+.hero{padding:40px 0 30px;text-align:center}
+.hero .eyebrow{font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sage);display:inline-flex;align-items:center;gap:9px;justify-content:center}
+.hero h1{font-size:2.7rem;font-weight:700;margin:14px 0 0;letter-spacing:-.5px}
+.hero h1 .accent{color:var(--indigo)}
+.hero .sub{color:var(--muted2);margin:14px auto 0;font-size:1.12rem;max-width:62ch}
+.hero-stats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.hstat{background:var(--card);border:1px solid var(--brd);border-radius:14px;padding:10px 20px;box-shadow:var(--shadow);display:flex;align-items:center;gap:10px}
+.hstat .num{font-family:var(--head);font-weight:700;font-size:1.5rem;color:var(--indigo)}
+.hstat .lab{font-family:var(--head);font-size:13.5px;color:var(--muted);text-align:left;line-height:1.2}
+
+/* ---------- Nav sticky ---------- */
+nav.jump{position:sticky;top:0;z-index:40;background:rgba(246,242,234,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--brd);padding:10px 0}
+.jump-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.jpill{border:1.5px solid var(--brd2);background:var(--card);color:var(--indigo);border-radius:999px;padding:7px 16px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:7px}
+.jpill:hover{background:var(--indigoL)}
+.jpill.sage{color:var(--sageD)}
+.jpill.sage:hover{background:var(--sageL)}
+.jpill svg{width:15px;height:15px}
+
+main{padding:36px 0 60px}
+.kicker{font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold)}
+.sec-title{font-size:1.9rem;margin:6px 0 8px;letter-spacing:-.3px}
+.lead{font-size:1.07rem;color:var(--text);margin-bottom:16px;max-width:74ch}
+
+/* ---------- Apertura / problema ---------- */
+.opener{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;background:var(--card);border:1px solid var(--brd);border-radius:22px;padding:30px;box-shadow:var(--shadow);margin-bottom:14px}
+.opener .fig{margin:0}
+.opener figure img,.method-fig img{border-radius:16px;border:1px solid var(--brd);box-shadow:var(--shadow)}
+.opener h2{font-size:1.7rem;margin-bottom:10px;letter-spacing:-.3px}
+.opener p{margin-bottom:12px}
+.opener .pull{font-family:var(--head);font-weight:600;color:var(--indigo);font-size:1.12rem;border-left:4px solid var(--gold);padding-left:14px;margin-top:6px}
+
+/* ---------- Recommender ---------- */
+.reco{background:linear-gradient(135deg, var(--indigo), var(--indigoD));border-radius:22px;padding:28px 30px;color:#fff;margin:30px 0;box-shadow:var(--shadow2)}
+.reco h2{color:#fff;font-size:1.5rem;display:flex;align-items:center;gap:12px}
+.reco h2 svg{width:26px;height:26px;flex:0 0 auto}
+.reco p{color:rgba(255,255,255,.85);margin:8px 0 16px}
+.reco-chips{display:flex;flex-wrap:wrap;gap:10px}
+.rchip{border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:9px 17px;font-size:15px;font-weight:600;text-align:left}
+.rchip:hover{background:rgba(255,255,255,.18)}
+.rchip.on{background:var(--gold2);border-color:var(--gold2);color:#fff}
+.reco-out{margin-top:16px;font-family:var(--head);font-weight:600;color:#fff;min-height:0;display:none}
+.reco-out.show{display:block;animation:fade .3s ease}
+
+/* ---------- Phase header ---------- */
+.phase{margin-top:40px;scroll-margin-top:64px}
+.phase-head{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+.phase-badge{width:52px;height:52px;border-radius:15px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--head);font-weight:700;font-size:1.4rem;box-shadow:var(--shadow)}
+.phase-1 .phase-badge{background:linear-gradient(135deg,var(--indigo2),var(--indigo))}
+.phase-2 .phase-badge{background:linear-gradient(135deg,var(--sage2),var(--sage))}
+.phase-head h2{font-size:1.7rem;letter-spacing:-.3px}
+.phase-head .pmeta{font-family:var(--head);font-size:13.5px;color:var(--muted);font-weight:600}
+.phase-banner{margin:12px 0 22px}
+.phase-banner img{border-radius:18px;border:1px solid var(--brd);box-shadow:var(--shadow);width:100%;max-width:560px}
+
+/* ---------- Method cards ---------- */
+.methods{display:flex;flex-direction:column;gap:20px}
+.method{background:var(--card);border:1px solid var(--brd);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;position:relative;transition:box-shadow .3s,transform .3s,border-color .3s;scroll-margin-top:74px}
+.method::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px}
+.phase-1 .method::before{background:linear-gradient(var(--indigo2),var(--indigo))}
+.phase-2 .method::before{background:linear-gradient(var(--sage2),var(--sage))}
+.method.glow{border-color:var(--gold2);box-shadow:0 0 0 3px var(--goldL),var(--shadow2);transform:translateY(-2px)}
+.m-inner{padding:24px 26px 24px 30px}
+.m-top{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.m-num{width:46px;height:46px;border-radius:13px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-weight:700;font-size:1.3rem;color:#fff}
+.phase-1 .m-num{background:var(--indigo)}
+.phase-2 .m-num{background:var(--sage)}
+.m-titles{flex:1;min-width:220px}
+.m-titles h3{font-size:1.32rem;letter-spacing:-.2px}
+.m-for{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-family:var(--head);font-size:13.5px;font-weight:600;color:var(--muted);background:var(--paper2);border-radius:999px;padding:3px 13px}
+.m-for svg{width:14px;height:14px}
+.m-toggle{border:1.5px solid var(--brd2);background:var(--card);color:var(--indigo);border-radius:999px;width:40px;height:40px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.phase-2 .m-toggle{color:var(--sageD)}
+.m-toggle svg{width:20px;height:20px;transition:transform .3s}
+.method.open .m-toggle svg{transform:rotate(180deg)}
+.m-how{margin-top:14px}
+.m-body{display:none}
+.method.open .m-body{display:block;animation:fade .35s ease}
+.m-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:16px}
+.m-grid.has-img{grid-template-columns:1.15fr .85fr;align-items:start}
+.example{background:var(--sageL);border:1px solid rgba(42,133,120,.25);border-radius:14px;padding:16px 18px}
+.phase-1 .example{background:var(--indigoL);border-color:rgba(70,60,151,.2)}
+.example .ex-lab{font-family:var(--head);font-size:12.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:7px;margin-bottom:7px}
+.example .ex-lab>svg{width:16px;height:16px;flex:0 0 auto}
+.phase-1 .example .ex-lab{color:var(--indigo)}
+.subj{display:inline-flex;align-items:center;font-family:var(--head);font-size:12.5px;font-weight:700;color:#fff;background:var(--gold);border-radius:999px;padding:2px 11px;margin-left:auto}
+.method-fig{margin:0}
+.method-fig img{width:100%}
+.method-fig figcaption{font-family:var(--head);font-size:12.5px;color:var(--light);text-align:center;margin-top:6px}
+.steps-mini{margin:14px 0 0 0;counter-reset:st;list-style:none}
+.steps-mini li{position:relative;padding-left:34px;margin-bottom:9px}
+.steps-mini li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:1px;width:23px;height:23px;border-radius:50%;background:var(--paper2);color:var(--indigo);font-family:var(--head);font-weight:700;font-size:12.5px;display:flex;align-items:center;justify-content:center}
+.phase-2 .steps-mini li::before{color:var(--sageD)}
+.m-action{margin-top:16px;background:var(--goldL);border:1px solid rgba(184,134,11,.3);border-radius:12px;padding:13px 16px;display:flex;gap:11px;align-items:flex-start}
+.m-action svg{width:20px;height:20px;flex:0 0 auto;margin-top:2px}
+.m-action .ma-txt{font-size:15.5px}
+.m-action .ma-txt strong{font-family:var(--head);color:var(--gold)}
+
+/* ---------- Tool: Pomodoro timer ---------- */
+.tool{margin-top:16px;border-top:1px dashed var(--brd2);padding-top:16px}
+.tool-lab{font-family:var(--head);font-size:12.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--indigo);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.timer-box{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.timer-disp{font-family:var(--head);font-weight:700;font-size:2.8rem;color:var(--indigo);min-width:150px;font-variant-numeric:tabular-nums}
+.timer-ctrl{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.tdur{border:1.5px solid var(--brd2);background:var(--card);color:var(--indigo);border-radius:999px;padding:6px 14px;font-size:13.5px;font-weight:600}
+.tdur.sel{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.timer-state{font-family:var(--head);font-size:14px;font-weight:600;color:var(--muted);flex-basis:100%}
+
+/* ---------- Tool: flashcard ---------- */
+.fc{perspective:1000px;height:150px;max-width:340px}
+.fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s;cursor:pointer;border-radius:16px}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;padding:18px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:7px}
+.fc-front{background:var(--sage);color:#fff}
+.fc-front .fc-q{font-family:var(--head);font-weight:600;font-size:1.02rem}
+.fc-front .fc-hint{font-size:12.5px;opacity:.8;font-family:var(--head)}
+.fc-back{background:var(--card);border:2px solid var(--sage);color:var(--text);transform:rotateY(180deg);overflow:auto;font-size:15.5px}
+
+/* ---------- Attività interattive ---------- */
+.tool-fb{display:none;margin-top:12px;border-radius:10px;padding:11px 15px;font-family:var(--head);font-size:14.5px;font-weight:600}
+.tool-fb.show{display:block;animation:fade .3s ease}
+.tool-fb.good{background:var(--sageL);color:var(--sageD);border:1px solid var(--sage)}
+.tool-fb.warn{background:var(--warnL);color:var(--warn);border:1px solid var(--gold)}
+.pick-grid{display:flex;flex-direction:column;gap:9px;margin-top:6px}
+.pick{text-align:left;border:1.5px solid var(--brd2);background:var(--card);color:var(--text);border-radius:12px;padding:11px 15px;font-family:var(--body);font-size:16px;display:flex;align-items:center;gap:12px}
+.pick:hover{border-color:var(--indigo2)}
+.pick.sel{border-color:var(--indigo);background:var(--indigoL)}
+.pick .tick{width:23px;height:23px;border-radius:7px;border:1.5px solid var(--brd2);flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff}
+.pick.sel .tick{background:var(--indigo);border-color:var(--indigo)}
+.pick .tick svg{display:none;width:14px;height:14px}
+.pick.sel .tick svg{display:block}
+.tfield{display:flex;flex-direction:column;gap:5px}
+.tfield label{font-family:var(--head);font-size:13px;font-weight:600;color:var(--muted)}
+.count-lab{font-family:var(--head);font-size:13px;color:var(--muted);margin-top:6px}
+.spaced-form{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+input[type=date]{font-family:var(--body);font-size:17px;padding:9px 12px;border:1.5px solid var(--brd2);border-radius:10px;background:var(--card);color:var(--text)}
+.spaced-out{display:none;gap:10px;flex-wrap:wrap;margin-top:14px}
+.spaced-out.show{display:flex}
+.rip{background:var(--sageL);border:1px solid var(--sage);border-radius:12px;padding:10px 16px;min-width:120px}
+.rip .rlab{font-family:var(--head);font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--sageD);display:block}
+.rip .rdate{font-family:var(--head);font-size:1.2rem;font-weight:700;color:var(--indigoD);display:block}
+.rip .rday{font-family:var(--head);font-size:12.5px;color:var(--muted);text-transform:capitalize}
+.leitner-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 14px}
+.lbox{border:1.5px solid var(--brd2);border-radius:13px;padding:12px 10px;text-align:center;background:var(--card);transition:border-color .3s,background .3s}
+.lbox.pulse{border-color:var(--sage);background:var(--sageL)}
+.lbox .lb-t{font-family:var(--head);font-weight:700;font-size:14px;color:var(--sageD);display:block}
+.lbox .lb-s{font-family:var(--head);font-size:11.5px;color:var(--muted);display:block;margin-bottom:4px}
+.lbox .lb-n{font-family:var(--head);font-weight:700;font-size:1.7rem;color:var(--sage)}
+.lcard{background:var(--paper2);border:1.5px solid var(--brd2);border-radius:14px;padding:18px;text-align:center;margin-bottom:12px}
+.lcard .lc-q{font-family:var(--head);font-weight:600;font-size:1.1rem;color:var(--indigoD)}
+.lcard .lc-q strong{color:var(--indigo)}
+.lcard .lc-a{font-family:var(--head);font-weight:700;font-size:1.25rem;color:var(--sageD);margin-top:8px;display:none}
+.lcard .lc-a.show{display:block;animation:fade .3s ease}
+
+/* ---------- Buttons ---------- */
+.btn{border:none;border-radius:12px;padding:11px 22px;font-size:15.5px;font-weight:600;display:inline-flex;align-items:center;gap:9px;min-height:46px}
+.btn-ind{background:var(--indigo);color:#fff}.btn-ind:hover{background:var(--indigo2)}
+.btn-sage{background:var(--sage);color:#fff}.btn-sage:hover{background:var(--sage2)}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:var(--gold2)}
+.btn-ghost{background:none;border:1.5px solid var(--brd2);color:var(--indigo)}.btn-ghost:hover{background:var(--indigoL)}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.hint{color:var(--muted);font-size:14.5px}
+
+/* ---------- Chiusura / metacognizione ---------- */
+.closing{display:grid;grid-template-columns:.85fr 1.15fr;gap:26px;align-items:center;margin-top:44px;background:var(--card);border:1px solid var(--brd);border-radius:22px;padding:30px;box-shadow:var(--shadow)}
+.closing figure{margin:0}
+.closing figure img{border-radius:16px;border:1px solid var(--brd);box-shadow:var(--shadow)}
+.closing h2{font-size:1.6rem;margin-bottom:10px}
+.meta-q{margin-top:14px}
+.meta-q label{font-family:var(--head);font-weight:600;font-size:1.02rem;color:var(--indigoD);display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.meta-q label .mq-n{width:26px;height:26px;border-radius:50%;background:var(--indigoL);color:var(--indigo);display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:13px;font-weight:700;flex:0 0 auto}
+textarea,select,input[type=text]{font-family:var(--body);font-size:18px;padding:10px 13px;border:1.5px solid var(--brd2);border-radius:10px;background:var(--card);color:var(--text);width:100%}
+textarea{min-height:74px;resize:vertical;line-height:1.55}
+textarea:focus,select:focus,input:focus{outline:none;border-color:var(--indigo2)}
+.fb-inline{display:none;margin-top:10px;border-radius:10px;padding:10px 15px;font-family:var(--head);font-size:14.5px;font-weight:600}
+.fb-inline.show{display:block;animation:fade .3s ease}
+.fb-inline.warn{background:var(--warnL);color:var(--warn);border:1px solid var(--gold)}
+.fb-inline.good{background:var(--sageL);color:var(--sageD);border:1px solid var(--sage)}
+
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ---------- Modal ---------- */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(46,38,104,.5);z-index:100;align-items:center;justify-content:center;padding:20px}
+.modal-bg.on{display:flex;animation:fade .25s ease}
+.modal{background:var(--card);border-radius:20px;max-width:800px;width:100%;max-height:87vh;overflow:auto;padding:28px}
+.modal-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+.modal-top h2{font-size:1.4rem}
+.modal-x{background:none;border:none;font-size:26px;color:var(--muted);line-height:1;padding:2px 10px}.modal-x:hover{color:var(--indigo)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{border:1.5px solid var(--brd2);background:var(--card);color:var(--indigo);border-radius:999px;padding:7px 16px;font-size:14px;font-weight:600}
+.tab.sel{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.tabpane{display:none}.tabpane.on{display:block;animation:fade .25s ease}
+.tabpane h3{font-size:1.05rem;margin:14px 0 6px}
+.tabpane p,.tabpane li{font-size:16.5px}
+.tabpane ul{margin:6px 0 6px 22px}
+
+footer{border-top:1px solid var(--brd);background:rgba(255,255,255,.6);padding:20px 0;text-align:center;color:var(--muted);font-size:14.5px;font-family:var(--head)}
+
+@media (max-width:820px){
+  .opener,.closing{grid-template-columns:1fr}
+  .opener figure,.closing figure{order:-1}
+  .m-grid.has-img{grid-template-columns:1fr}
+  .hero h1{font-size:2rem}
+}
+@media (max-width:520px){
+  .timer-disp{font-size:2.2rem}
+  .hero h1{font-size:1.7rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="topline">
+      <div class="brand">
+        <img src="logo.png" alt="Logo Scuola Sacra Famiglia" class="brand-logo">
+        <div class="brand-txt">
+          <span class="brand-name">Scuola Sacra Famiglia</span>
+          <span class="brand-role">Animatore Digitale · Andrea Cerioli</span>
+        </div>
+      </div>
+      <button class="btn-docenti" id="openDocenti">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span>Info docenti</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <span class="eyebrow">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l10-4 10 4-10 4z"/><path d="M6 10v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
+      Imparare a imparare
+    </span>
+    <h1>L'Atlante dei <span class="accent">Metodi di Studio</span></h1>
+    <p class="sub">Studiare tanto non basta: conta <strong>come</strong> lo fai. Qui trovi <strong id="statMethods">9</strong> tecniche collaudate, ognuna con un esempio pronto per le tue materie. Scegli le tue e mettile alla prova.</p>
+    <div class="hero-stats">
+      <div class="hstat"><span class="num" id="stat1">9</span><span class="lab">metodi<br>da provare</span></div>
+      <div class="hstat"><span class="num">2</span><span class="lab">fasi:<br>capire · ricordare</span></div>
+      <div class="hstat"><span class="num">0</span><span class="lab">app o<br>abbonamenti</span></div>
+    </div>
+  </div>
+</div>
+
+<nav class="jump" aria-label="Navigazione rapida">
+  <div class="wrap">
+    <div class="jump-pills" id="jumpPills">
+      <button class="jpill" data-jump="reco"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Trova il tuo metodo</button>
+      <button class="jpill" data-jump="fase1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Fase 1 · Capire</button>
+      <button class="jpill sage" data-jump="fase2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h13a3 3 0 0 1 0 6H4zM4 12h11a3 3 0 0 1 0 6H4z"/></svg>Fase 2 · Ricordare</button>
+      <button class="jpill" data-jump="fine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>La mia scelta</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <!-- ===== APERTURA / IL PROBLEMA ===== -->
+    <section class="opener" id="opener">
+      <div>
+        <span class="kicker">Prima di tutto</span>
+        <h2>Rileggere e sottolineare: la trappola numero uno</h2>
+        <p>Passi il pomeriggio a rileggere il capitolo e a sottolineare mezza pagina. Alla fine chiudi il libro con la sensazione di aver studiato… ma il giorno dopo, all'interrogazione, non ti viene niente. Perché?</p>
+        <p>Perché rileggere è uno <strong>studio passivo</strong>: le parole ti <em>suonano familiari</em> e il cervello le scambia per parole <em>che sai davvero</em>. È un inganno comodo ma inutile.</p>
+        <p class="pull">Esiste un modo per studiare meno ore e ricordare di più? Sì — anzi, ne esistono nove. Cominciamo.</p>
+      </div>
+      <figure class="fig">
+        <img src="1.jpg" alt="Uno studente frustrato che rilegge e sottolinea senza risultato: lo studio passivo" loading="lazy">
+      </figure>
+    </section>
+
+    <!-- ===== RECOMMENDER ===== -->
+    <section class="reco" id="reco">
+      <h2>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/><path d="M9 21h6M10 17v4M14 17v4"/></svg>
+        Qual è il tuo problema con lo studio?
+      </h2>
+      <p>Tocca la frase che ti somiglia di più: ti accendo i metodi che fanno al caso tuo.</p>
+      <div class="reco-chips" id="recoChips"></div>
+      <div class="reco-out" id="recoOut"></div>
+    </section>
+
+    <!-- ===== FASE 1 ===== -->
+    <section class="phase phase-1" id="fase1">
+      <div class="phase-head">
+        <div class="phase-badge">1</div>
+        <div>
+          <span class="kicker">Fase 1</span>
+          <h2>Gestire il tempo e capire davvero</h2>
+          <span class="pmeta">Metodi per concentrarsi, organizzare e comprendere a fondo</span>
+        </div>
+      </div>
+      <figure class="phase-banner"><img src="2.jpg" alt="Fase 1: gestione del tempo e comprensione profonda — la tecnica del Pomodoro" loading="lazy"></figure>
+      <div class="methods" id="methodsF1"></div>
+    </section>
+
+    <!-- ===== FASE 2 ===== -->
+    <section class="phase phase-2" id="fase2">
+      <div class="phase-head">
+        <div class="phase-badge">2</div>
+        <div>
+          <span class="kicker">Fase 2</span>
+          <h2>Fissare le cose nella memoria</h2>
+          <span class="pmeta">Metodi per ricordare a lungo, contro la curva dell'oblio</span>
+        </div>
+      </div>
+      <figure class="phase-banner"><img src="5.jpg" alt="Fase 2: consolidamento e memorizzazione — la ripetizione spaziata contro l'oblio" loading="lazy"></figure>
+      <div class="methods" id="methodsF2"></div>
+    </section>
+
+    <!-- ===== CHIUSURA / METACOGNIZIONE ===== -->
+    <section class="closing" id="fine">
+      <figure><img src="7.jpg" alt="Uno studente soddisfatto: il successo nello studio" loading="lazy"></figure>
+      <div>
+        <span class="kicker">L'idea diventa azione</span>
+        <h2>Adesso scegli. E parti da poco.</h2>
+        <p>Nessuno usa tutti e nove i metodi insieme: sarebbe come allenare dieci sport nello stesso giorno. Scegline <strong>due</strong> e provali per una settimana intera, poi torna qui e cambia un pezzo.</p>
+        <div class="meta-q">
+          <label for="pickA"><span class="mq-n">1</span>Un metodo della Fase 1 (capire) che provo questa settimana:</label>
+          <select id="pickA"></select>
+        </div>
+        <div class="meta-q">
+          <label for="pickB"><span class="mq-n">2</span>Un metodo della Fase 2 (ricordare) che provo questa settimana:</label>
+          <select id="pickB"></select>
+        </div>
+        <div class="meta-q">
+          <label for="whenBox"><span class="mq-n">3</span>Il primo momento in cui li userò (materia + giorno):</label>
+          <input type="text" id="whenBox" placeholder="Es. Scienze, mercoledì pomeriggio" maxlength="80">
+        </div>
+        <div class="fb-inline" id="pickFb"></div>
+        <div class="btnrow">
+          <button class="btn btn-gold" id="copyPick"><span>Copia il mio impegno</span></button>
+          <span class="hint" id="pickMsg"></span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><span>L'Atlante dei Metodi di Studio · Scuola Sacra Famiglia, Orzinuovi · Animatore Digitale Andrea Cerioli</span></div>
+</footer>
+
+<!-- ===== MODAL DOCENTI ===== -->
+<div class="modal-bg" id="modalBg" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-top">
+      <h2 id="modalTitle">Informazioni per i docenti</h2>
+      <button class="modal-x" id="closeDocenti" aria-label="Chiudi">×</button>
+    </div>
+    <div class="tabs">
+      <button class="tab sel" data-tab="d1">Metodologia</button>
+      <button class="tab" data-tab="d2">Uso in classe</button>
+      <button class="tab" data-tab="d3">Le radici dei metodi</button>
+    </div>
+    <div class="tabpane on" id="d1">
+      <p><strong>Obiettivo:</strong> dare agli studenti della secondaria di I grado (~11-13 anni) un repertorio di metodi di studio trasferibili a qualunque disciplina, presentati come <em>attrezzi tra cui scegliere</em> e non come un'unica ricetta. Competenza-chiave: «imparare a imparare».</p>
+      <h3>Cornice pedagogica</h3>
+      <ul>
+        <li><strong>Piaget — conflitto cognitivo:</strong> l'apertura smonta la strategia spontanea (rileggere e sottolineare) mostrandone il fallimento; da lì parte la ricostruzione.</li>
+        <li><strong>Bruner — apprendimento per scoperta:</strong> l'atlante è esplorabile; il «Trova il tuo metodo» parte dal problema reale dello studente, non da una lezione frontale.</li>
+        <li><strong>Vygotskij — scaffolding:</strong> ogni metodo offre esempi già calati nelle materie, micro-consegne pratiche e strumenti (timer, flashcard) come appoggi calibrati.</li>
+        <li><strong>Dewey — learning by doing:</strong> ogni scheda chiude con «prova questa settimana»; la teoria diventa subito azione.</li>
+        <li><strong>Bandura — self-efficacy:</strong> la scelta finale è granulare e credibile (due metodi, una settimana, un momento preciso), non un buon proposito generico.</li>
+        <li><strong>Metacognizione:</strong> il percorso chiude con la scelta consapevole e un impegno scritto, da rivedere dopo una settimana.</li>
+      </ul>
+      <h3>Tag</h3>
+      <p>Imparare a imparare · Metodo di studio · Metacognizione · Autoregolazione · Inclusione (alta leggibilità)</p>
+    </div>
+    <div class="tabpane" id="d2">
+      <h3>Come è organizzato</h3>
+      <ul>
+        <li><strong>Apertura:</strong> il problema dello studio passivo (aggancio, effetto Zeigarnik: «esiste un modo?…»).</li>
+        <li><strong>Trova il tuo metodo:</strong> selettore per problema che evidenzia i metodi utili — utile per partire dal vissuto della classe.</li>
+        <li><strong>Fase 1 (capire e organizzare):</strong> Pomodoro, Cornell, Mappe mentali, SQ3R, Interleaving, Feynman.</li>
+        <li><strong>Fase 2 (memorizzare):</strong> Ripetizione spaziata, Recupero attivo, Sistema Leitner.</li>
+        <li><strong>Chiusura:</strong> scelta di due metodi e impegno scritto copiabile.</li>
+      </ul>
+      <h3>Suggerimenti d'uso</h3>
+      <ul>
+        <li>Alla LIM: aprire una scheda per volta e provare subito lo strumento (il timer Pomodoro, la flashcard del recupero attivo).</li>
+        <li>La pagina <strong>non salva nulla</strong>: l'impegno finale si copia e si incolla nel diario o su Classroom. Adatto ai laboratori con dispositivi condivisi.</li>
+        <li>Ogni scheda ha un esempio già pronto per una materia: si può chiedere agli studenti di riscriverlo sulla materia del giorno.</li>
+        <li>Funziona anche come consegna per casa: esplorare l'atlante e portare in classe i due metodi scelti.</li>
+      </ul>
+    </div>
+    <div class="tabpane" id="d3">
+      <p>I metodi non sono invenzioni recenti: hanno radici nella ricerca su apprendimento e memoria. Le fonti d'origine:</p>
+      <ul>
+        <li><strong>Tecnica del Pomodoro</strong> — Francesco Cirillo (fine anni '80).</li>
+        <li><strong>Metodo Cornell</strong> — Walter Pauk, Cornell University.</li>
+        <li><strong>Mappe mentali</strong> — Tony Buzan.</li>
+        <li><strong>SQ3R</strong> — Francis P. Robinson, <em>Effective Study</em> (1946).</li>
+        <li><strong>Interleaving</strong> — ricerca sull'apprendimento intervallato (Rohrer, Bjork).</li>
+        <li><strong>Metodo Feynman</strong> — dallo stile didattico di Richard Feynman.</li>
+        <li><strong>Ripetizione spaziata</strong> — Hermann Ebbinghaus e la «curva dell'oblio».</li>
+        <li><strong>Recupero attivo (retrieval practice)</strong> — Roediger &amp; Karpicke (2006).</li>
+        <li><strong>Sistema Leitner</strong> — Sebastian Leitner (1970s), le scatole delle flashcard.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ============= DATI: 9 METODI ============= */
+const SUBJ_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M19 3v18"/></svg>';
+
+const METHODS = [
+  /* ---------- FASE 1 ---------- */
+  {phase:1, id:"pomodoro", name:"La Tecnica del Pomodoro", forWho:"Per chi si distrae dopo cinque minuti",
+   img:null,
+   how:"Il cervello non regge ore di concentrazione continua. Il Pomodoro spezza lo studio in blocchi corti e protetti: <strong>25 minuti di lavoro senza distrazioni</strong>, poi <strong>5 minuti di pausa vera</strong>. Ogni quattro blocchi, una pausa lunga.",
+   subj:"Storia",
+   example:"Devi studiare l'Impero Romano. Metti il timer a 25 minuti e apri <em>solo</em> il libro di storia: niente telefono, niente altre materie. Quando suona, alzati e cammina 5 minuti. Al terzo pomodoro avrai fatto più di un pomeriggio intero passato a rimandare.",
+   steps:["Scegli una cosa sola da studiare e metti il timer a 25 minuti.","Studia fino al suono, senza aprire altro.","Pausa di 5 minuti in piedi, lontano dagli schermi. Poi riparti."],
+   action:"Fai <strong>un solo pomodoro</strong> oggi sul compito che rimandi di più. Uno solo: è più facile iniziare di quanto pensi.",
+   tool:"timer"},
+
+  {phase:1, id:"cornell", name:"Il Metodo Cornell", forWho:"Per chi prende appunti che poi non ricapisce",
+   img:"6.jpg", imgAlt:"Il metodo Cornell: foglio diviso in parole chiave, appunti dettagliati e riassunto finale",
+   how:"Un modo di prendere appunti che li rende utili anche mesi dopo. Dividi il foglio in <strong>tre zone</strong>: una colonna larga a destra per gli appunti, una stretta a sinistra per le parole-chiave e le domande, una fascia in basso per il riassunto.",
+   subj:"Scienze",
+   example:"Lezione sul sistema solare. A destra scrivi gli appunti (i pianeti, l'ordine, le distanze). Dopo la lezione, a sinistra aggiungi le domande («perché Marte è rosso?», «quali sono i pianeti gassosi?»). In fondo, due righe di riassunto con parole tue. Per ripassare ti basta coprire la parte destra e rispondere alle domande di sinistra.",
+   steps:["Traccia le tre zone prima della lezione.","Durante: appunti nella colonna larga.","Dopo: parole-chiave e domande a sinistra, riassunto in fondo."],
+   action:"Prepara <strong>un foglio Cornell</strong> per la prossima lezione e usalo. Ripassare partirà dalle tue domande, non dal muro di appunti.",
+   tool:null},
+
+  {phase:1, id:"mappe", name:"Le Mappe Mentali", forWho:"Per chi ricorda meglio con le immagini",
+   img:"4.jpg", imgAlt:"Una mappa mentale: idea centrale con rami colorati verso i concetti collegati",
+   how:"Invece di una lista di righe tutte uguali, organizzi le informazioni <strong>a raggiera</strong>: l'argomento al centro, i concetti principali come rami, i dettagli come ramoscelli. Colori e disegni diversi per ogni ramo aiutano la memoria visiva.",
+   subj:"Geografia",
+   example:"Studi l'Italia. Al centro scrivi «ITALIA»; parti quattro rami: Nord, Centro, Sud, Isole. Da ogni ramo escono le regioni; da ogni regione, in un altro colore, i fiumi e i monti. In un colpo d'occhio vedi tutta la geografia, collegata invece che elencata.",
+   steps:["Scrivi l'argomento al centro del foglio.","Traccia un ramo per ogni concetto principale.","Aggiungi dettagli e usa un colore diverso per ogni ramo."],
+   action:"Trasforma <strong>l'ultimo paragrafo che hai studiato</strong> in una mini-mappa. Se riesci a disegnarla, l'hai capito.",
+   tool:null},
+
+  {phase:1, id:"sq3r", name:"Il Metodo SQ3R", forWho:"Per chi legge una pagina e non ricorda nulla",
+   img:null,
+   how:"Cinque mosse per leggere <strong>attivamente</strong> invece che passivamente: <strong>S</strong>foglia, trasforma i titoli in <strong>D</strong>omande, <strong>L</strong>eggi cercando le risposte, <strong>R</strong>ipeti a voce, <strong>R</strong>ipassa. Il nome viene dall'inglese (Survey, Question, Read, Recite, Review).",
+   subj:"Antologia",
+   example:"Un capitolo intitolato «La nascita dei Comuni». Prima sfoglia: titoli, immagini, parole in grassetto. Poi trasforma il titolo in domande: «Che cos'è un Comune? Quando nasce? Perché?». Adesso leggi per <em>cacciare</em> quelle risposte. A fine pagina ripetile a voce. Il giorno dopo, ripassa.",
+   steps:["Sfoglia il capitolo (2 minuti): titoli, immagini, grassetti.","Trasforma ogni titolo in una o due domande.","Leggi cercando le risposte, poi ripetile a voce e ripassa il giorno dopo."],
+   action:"Applica le cinque mosse al <strong>prossimo capitolo di storia o antologia</strong>. La lettura diventa una caccia, non una passeggiata.",
+   tool:"sq3r"},
+
+  {phase:1, id:"interleaving", name:"L'Interleaving (alternare)", forWho:"Per chi fa venti esercizi uguali e poi si blocca al compito",
+   img:null,
+   how:"Invece di ripetere lo stesso tipo di esercizio all'infinito (studio «a blocchi»), <strong>alterni argomenti diversi</strong> nella stessa sessione. Sembra più difficile — e lo è — ma è proprio la fatica di cambiare che insegna al cervello a <strong>scegliere lo strumento giusto</strong>, non solo a ripetere a memoria.",
+   subj:"Matematica",
+   example:"Devi allenarti in matematica. Invece di fare venti espressioni tutte uguali, mescola: un'espressione, poi un problema di geometria, poi una frazione, poi di nuovo un'espressione diversa. All'inizio va più piano, ma alla verifica — dove gli esercizi sono mescolati — sarai pronto a riconoscerli.",
+   steps:["Nella stessa sessione, prepara 2-3 tipi di esercizi diversi.","Alternali invece di finirne uno alla volta.","Accetta di andare più piano: quella fatica è l'apprendimento vero."],
+   action:"Nel prossimo ripasso di matematica, <strong>mescola due tipi di esercizi</strong> invece di farli a blocchi separati.",
+   tool:null},
+
+  {phase:1, id:"feynman", name:"Il Metodo Feynman", forWho:"Per chi crede di aver capito, finché non deve spiegarlo",
+   img:"3.jpg", imgAlt:"Il metodo Feynman: spiegare un concetto complesso con parole semplici, come a un bambino",
+   how:"La prova del nove della comprensione: <strong>spiega l'argomento come lo diresti a un bambino di sei anni</strong>, con parole semplici e senza leggere. Dove ti inceppi o sei costretto a usare i paroloni del libro, lì c'è il buco che non hai ancora capito.",
+   subj:"Scienze",
+   example:"Hai studiato la fotosintesi. Prova a spiegarla al tuo fratellino piccolo: «la pianta prende la luce del sole e la usa come cibo…». Se ti blocchi su «clorofilla» e non sai dirlo con parole tue, hai trovato esattamente il punto da ristudiare.",
+   steps:["Scegli un argomento e spiegalo a voce, con parole semplicissime.","Segna i punti dove ti blocchi o usi parole che non sai spiegare.","Torna sul libro solo su quei punti, poi riprova a spiegare."],
+   action:"Stasera <strong>spiega ad alta voce a qualcuno</strong> (o allo specchio) l'argomento che studierai. I buchi verranno fuori subito.",
+   tool:"feynman"},
+
+  /* ---------- FASE 2 ---------- */
+  {phase:2, id:"spaziata", name:"La Ripetizione Spaziata", forWho:"Per chi studia tutto la sera prima",
+   img:null,
+   how:"Il cervello dimentica in fretta ciò che vede una volta sola (la «curva dell'oblio»). Se invece <strong>ripassi a intervalli crescenti</strong> — oggi, poi dopo 1 giorno, poi dopo 3, poi dopo una settimana — ogni ripasso riporta su l'informazione un attimo prima che sparisca, e la fissa per mesi. Ripassi brevi ma distanziati battono una maratona notturna.",
+   subj:"Inglese",
+   example:"Venti parole nuove di inglese. Invece di ripeterle cento volte stasera, ripassale oggi (5 minuti), poi domani, poi fra tre giorni, poi fra una settimana. Ogni volta bastano pochi minuti, ma alla verifica — e anche dopo — le parole ci saranno ancora.",
+   steps:["Il giorno che studi, segna sul diario i ripassi: +1, +3, +7 giorni.","Ogni ripasso dura pochi minuti, sempre a libro chiuso.","Se un ripasso va liscio, allunga l'intervallo successivo."],
+   action:"Sul diario di oggi, <strong>scrivi già i tre appuntamenti di ripasso</strong> (+1, +3, +7) per la materia che studi stasera.",
+   tool:null},
+
+  {phase:2, id:"recupero", name:"Il Recupero Attivo", forWho:"Per chi rilegge dieci volte e non ricorda",
+   img:null,
+   how:"È il contrario di rileggere: invece di rimettere le informazioni <em>dentro</em>, provi a <strong>tirarle fuori</strong> a libro chiuso. Fai fatica — e proprio quella fatica scava il ricordo. Ciò che <em>non</em> ti viene in mente è la cosa più preziosa: è esattamente ciò che devi ripassare.",
+   subj:"Grammatica",
+   example:"Finito di studiare i complementi (oggetto, di luogo, di tempo…), chiudi il libro e su un foglio bianco scrivi tutto quello che ricordi. Poi apri e controlla. I complementi che ti sono sfuggiti sono la tua lista di ripasso, già pronta.",
+   steps:["Studia, poi chiudi il libro.","Su un foglio bianco scrivi (o dì a voce) tutto ciò che ricordi.","Controlla: ciò che mancava è la tua lista di ripasso."],
+   action:"Prova adesso con la carta qui sotto: rispondi <strong>a mente</strong>, poi girala e controlla.",
+   tool:"flashcard"},
+
+  {phase:2, id:"leitner", name:"Il Sistema Leitner", forWho:"Per chi deve imparare tante cose a memoria (date, parole, capitali)",
+   img:null,
+   how:"Un modo furbo di usare le flashcard, senza perdere tempo su ciò che già sai. Dividi le carte in <strong>tre scatole</strong>: la 1 la ripassi ogni giorno, la 2 ogni tre giorni, la 3 una volta a settimana. Se rispondi bene, la carta <strong>sale</strong> di scatola; se sbagli, <strong>torna nella scatola 1</strong>. Così ripassi tanto le cose difficili e poco quelle facili.",
+   subj:"Geografia",
+   example:"Le capitali europee su tante carte (davanti lo Stato, dietro la capitale). Le sbagli sempre → scatola 1, ogni giorno. Quelle che a volte azzecchi → scatola 2. Quelle che sai a colpo sicuro → scatola 3. Sbagli «Oslo»? La carta della Norvegia ritorna subito in scatola 1.",
+   steps:["Prepara le carte (domanda davanti, risposta dietro) e tre scatole.","Carta giusta: sale di scatola. Carta sbagliata: torna alla scatola 1.","Ripassa la scatola 1 ogni giorno, la 2 ogni 3 giorni, la 3 ogni settimana."],
+   action:"Costruisci <strong>10 flashcard</strong> sull'argomento più «a memoria» di questa settimana e sistemale in tre scatole (bastano tre mucchietti sul tavolo).",
+   tool:null}
+];
+
+/* ============= RENDER SCHEDE ============= */
+function methodCardHTML(m, index){
+  const hasImg = !!m.img;
+  const imgBlock = hasImg
+    ? '<figure class="method-fig"><img src="'+m.img+'" alt="'+m.imgAlt+'" loading="lazy"></figure>'
+    : '';
+  let toolBlock = "";
+  if(m.tool === "timer"){
+    toolBlock =
+      '<div class="tool">' +
+        '<div class="tool-lab"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>Provalo adesso</div>' +
+        '<div class="timer-box">' +
+          '<div class="timer-disp" id="timerDisp">25:00</div>' +
+          '<div class="timer-ctrl">' +
+            '<button class="tdur" data-min="15">15</button>' +
+            '<button class="tdur sel" data-min="25">25</button>' +
+            '<button class="tdur" data-min="40">40</button>' +
+            '<button class="btn btn-ind" id="timerStart"><span>Avvia</span></button>' +
+            '<button class="btn btn-ghost" id="timerReset"><span>Azzera</span></button>' +
+            '<span class="timer-state" id="timerState"></span>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  } else if(m.tool === "flashcard"){
+    toolBlock =
+      '<div class="tool">' +
+        '<div class="tool-lab"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Prova il recupero attivo</div>' +
+        '<div class="fc" id="demoFc">' +
+          '<div class="fc-inner" tabindex="0" role="button" aria-label="Carta: quali sono i tre stati della materia? Tocca per girare.">' +
+            '<div class="fc-face fc-front"><span class="fc-q">Quali sono i tre stati della materia?</span><span class="fc-hint">Rispondi a mente, poi tocca per girare</span></div>' +
+            '<div class="fc-face fc-back"><span>Solido, liquido e aeriforme (gassoso). Il passaggio da uno all\'altro dipende da temperatura e pressione.</span></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }
+  return (
+    '<article class="method" id="m-'+m.id+'" data-id="'+m.id+'">' +
+      '<div class="m-inner">' +
+        '<button class="m-head-btn" style="all:unset;cursor:pointer;display:block;width:100%">' +
+          '<div class="m-top">' +
+            '<div class="m-num">'+index+'</div>' +
+            '<div class="m-titles">' +
+              '<h3>'+m.name+'</h3>' +
+              '<span class="m-for"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>'+m.forWho+'</span>' +
+            '</div>' +
+            '<span class="m-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>' +
+          '</div>' +
+        '</button>' +
+        '<p class="m-how">'+m.how+'</p>' +
+        '<div class="m-body">' +
+          '<div class="m-grid'+(hasImg?' has-img':'')+'">' +
+            '<div>' +
+              '<div class="example">' +
+                '<div class="ex-lab">'+SUBJ_ICON+'Esempio pronto<span class="subj">'+m.subj+'</span></div>' +
+                '<p>'+m.example+'</p>' +
+              '</div>' +
+              '<ol class="steps-mini">'+m.steps.map(s=>'<li>'+s+'</li>').join("")+'</ol>' +
+            '</div>' +
+            (hasImg ? '<div>'+imgBlock+'</div>' : '') +
+          '</div>' +
+          toolBlock +
+          '<div class="m-action">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>' +
+            '<span class="ma-txt"><strong>Prova questa settimana:</strong> '+m.action+'</span>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</article>'
+  );
+}
+
+const f1 = document.getElementById("methodsF1");
+const f2 = document.getElementById("methodsF2");
+let counter = 0;
+METHODS.forEach(m=>{
+  counter++;
+  const html = methodCardHTML(m, counter);
+  (m.phase===1 ? f1 : f2).insertAdjacentHTML("beforeend", html);
+});
+/* conteggi derivati (mai hardcoded) */
+document.getElementById("statMethods").textContent = METHODS.length;
+document.getElementById("stat1").textContent = METHODS.length;
+
+/* toggle apertura schede */
+document.querySelectorAll(".method").forEach(card=>{
+  const btn = card.querySelector(".m-head-btn");
+  btn.addEventListener("click", ()=>card.classList.toggle("open"));
+});
+
+/* ============= FLASHCARD DEMO ============= */
+const demoFc = document.getElementById("demoFc");
+if(demoFc){
+  const inner = demoFc.querySelector(".fc-inner");
+  const flip = ()=>demoFc.classList.toggle("flip");
+  inner.addEventListener("click", flip);
+  inner.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); flip(); } });
+}
+
+/* ============= TIMER POMODORO ============= */
+let timerTotal=25*60, timerLeft=timerTotal, timerInt=null, audioCtx=null;
+const timerDisp=document.getElementById("timerDisp");
+function timerRender(){
+  if(!timerDisp) return;
+  const m=Math.floor(timerLeft/60), s=timerLeft%60;
+  timerDisp.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+document.querySelectorAll(".tdur").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    document.querySelectorAll(".tdur").forEach(x=>x.classList.remove("sel"));
+    b.classList.add("sel"); timerStop();
+    timerTotal=parseInt(b.dataset.min,10)*60; timerLeft=timerTotal; timerRender();
+    document.getElementById("timerState").textContent="";
+  });
+});
+function timerStop(){
+  if(timerInt){ clearInterval(timerInt); timerInt=null; }
+  const s=document.getElementById("timerStart"); if(s) s.querySelector("span").textContent="Avvia";
+}
+function beep(){
+  try{
+    if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    audioCtx.resume();
+    const o=audioCtx.createOscillator(), g=audioCtx.createGain();
+    o.connect(g); g.connect(audioCtx.destination); o.frequency.value=660;
+    g.gain.setValueAtTime(0.001,audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.25,audioCtx.currentTime+0.02);
+    g.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+1.1);
+    o.start(); o.stop(audioCtx.currentTime+1.15);
+  }catch(e){}
+}
+const timerStartBtn=document.getElementById("timerStart");
+if(timerStartBtn){
+  timerStartBtn.addEventListener("click", function(){
+    if(timerInt){ timerStop(); document.getElementById("timerState").textContent="In pausa."; return; }
+    if(!audioCtx){ try{ audioCtx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} }
+    this.querySelector("span").textContent="Pausa";
+    document.getElementById("timerState").textContent="Si studia: una cosa sola, fino al suono.";
+    timerInt=setInterval(()=>{
+      timerLeft--; timerRender();
+      if(timerLeft<=0){
+        timerStop(); timerLeft=timerTotal;
+        document.getElementById("timerState").textContent="Suonato! Ora 5 minuti di pausa vera: in piedi, lontano dagli schermi.";
+        beep(); setTimeout(timerRender,1500);
+      }
+    },1000);
+  });
+  document.getElementById("timerReset").addEventListener("click", ()=>{
+    timerStop(); timerLeft=timerTotal; timerRender();
+    document.getElementById("timerState").textContent="";
+  });
+}
+timerRender();
+
+/* ============= NAV RAPIDA ============= */
+document.querySelectorAll("#jumpPills .jpill").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    const el=document.getElementById(b.dataset.jump);
+    if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+});
+
+/* ============= RECOMMENDER ============= */
+const PROBLEMS = [
+  {q:"Mi distraggo dopo pochi minuti", methods:["pomodoro","interleaving"]},
+  {q:"Rileggo tante volte ma non ricordo", methods:["recupero","feynman","spaziata"]},
+  {q:"Non so prendere appunti utili", methods:["cornell","mappe"]},
+  {q:"Studio tutto la sera prima", methods:["spaziata","leitner","pomodoro"]},
+  {q:"Leggo ma non capisco", methods:["sq3r","feynman","mappe"]},
+  {q:"Dimentico date, parole e formule", methods:["leitner","spaziata","recupero"]}
+];
+const recoChips=document.getElementById("recoChips");
+const recoOut=document.getElementById("recoOut");
+PROBLEMS.forEach((p,i)=>{
+  const b=document.createElement("button");
+  b.className="rchip"; b.textContent=p.q; b.dataset.i=i;
+  b.addEventListener("click", ()=>selectProblem(i,b));
+  recoChips.appendChild(b);
+});
+function nameOf(id){ const m=METHODS.find(x=>x.id===id); return m?m.name:id; }
+function selectProblem(i, btn){
+  document.querySelectorAll(".rchip").forEach(x=>x.classList.remove("on"));
+  btn.classList.add("on");
+  const rec=PROBLEMS[i].methods;
+  document.querySelectorAll(".method").forEach(c=>c.classList.remove("glow"));
+  const names=rec.map(nameOf);
+  recoOut.innerHTML = "Per te funzionano soprattutto: <span style=\"color:#fff;text-decoration:underline;text-decoration-color:var(--gold2);text-underline-offset:3px\">"+names.join(" · ")+"</span>. Li ho evidenziati e aperti qui sotto.";
+  recoOut.classList.add("show");
+  rec.forEach((id,k)=>{
+    const card=document.getElementById("m-"+id);
+    if(card){
+      card.classList.add("glow","open");
+      if(k===0) setTimeout(()=>card.scrollIntoView({behavior:"smooth", block:"center"}), 120);
+    }
+  });
+}
+
+/* ============= SELECT SCELTA FINALE ============= */
+const pickA=document.getElementById("pickA");
+const pickB=document.getElementById("pickB");
+function fillSelect(sel, phase){
+  const opt0=document.createElement("option"); opt0.value=""; opt0.textContent="— scegli —"; sel.appendChild(opt0);
+  METHODS.filter(m=>m.phase===phase).forEach(m=>{
+    const o=document.createElement("option"); o.value=m.id; o.textContent=m.name; sel.appendChild(o);
+  });
+}
+fillSelect(pickA,1); fillSelect(pickB,2);
+
+function copyText(text,msgEl){
+  const done=()=>{ msgEl.textContent="Copiato! Incollalo nel diario o su Classroom."; setTimeout(()=>{msgEl.textContent="";},3800); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(()=>fb(text,done));
+  } else fb(text,done);
+}
+function fb(text,done){
+  const ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(ta); done();
+}
+document.getElementById("copyPick").addEventListener("click", ()=>{
+  const a=pickA.value, b=pickB.value, when=document.getElementById("whenBox").value.trim();
+  const fbEl=document.getElementById("pickFb");
+  if(!a||!b){
+    fbEl.className="fb-inline show warn";
+    fbEl.textContent="Scegli un metodo per capire e uno per ricordare: due bastano, ma servono entrambi.";
+    return;
+  }
+  fbEl.className="fb-inline show good";
+  fbEl.textContent="Ottima scelta. Provali per una settimana intera prima di giudicarli: un metodo si regola, non si cambia al primo intoppo.";
+  const lines=[
+    "IL MIO IMPEGNO DI STUDIO - L'Atlante dei Metodi",
+    "",
+    "Per CAPIRE proverò: "+nameOf(a),
+    "Per RICORDARE proverò: "+nameOf(b),
+    (when? "Comincio da: "+when : "Comincio da: (scegli materia e giorno)"),
+    "",
+    "Regola: una settimana di prova, poi cambio UN pezzo alla volta."
+  ];
+  copyText(lines.join("\n"), document.getElementById("pickMsg"));
+});
+
+/* ============= MODAL DOCENTI ============= */
+const modalBg=document.getElementById("modalBg");
+document.getElementById("openDocenti").addEventListener("click", ()=>modalBg.classList.add("on"));
+document.getElementById("closeDocenti").addEventListener("click", ()=>modalBg.classList.remove("on"));
+modalBg.addEventListener("click", e=>{ if(e.target===modalBg) modalBg.classList.remove("on"); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") modalBg.classList.remove("on"); });
+document.querySelectorAll(".tab").forEach(t=>{
+  t.addEventListener("click", ()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("sel"));
+    t.classList.add("sel");
+    document.querySelectorAll(".tabpane").forEach(p=>p.classList.toggle("on", p.id===t.dataset.tab));
+  });
+});
+</script>
+</body>
+</html>
