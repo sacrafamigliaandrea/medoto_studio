@@ -442,7 +442,7 @@ footer{border-top:1px solid var(--brd);background:rgba(255,255,255,.6);padding:2
       </ul>
       <h3>Suggerimenti d'uso</h3>
       <ul>
-        <li>Alla LIM: aprire una scheda per volta e provare subito lo strumento (il timer Pomodoro, la flashcard del recupero attivo).</li>
+        <li>Alla LIM: aprire una scheda per volta e far <strong>provare subito l'attività interattiva</strong>. Sei metodi hanno un esercizio pratico: timer Pomodoro, fabbrica di domande (SQ3R), «spiega da campione» con controllo del testo (Feynman), calcolatore dei ripassi 1-3-7 (ripetizione spaziata), flashcard girevole (recupero attivo), simulatore delle tre scatole (Leitner). Il feedback è sempre formativo, mai punitivo.</li>
         <li>La pagina <strong>non salva nulla</strong>: l'impegno finale si copia e si incolla nel diario o su Classroom. Adatto ai laboratori con dispositivi condivisi.</li>
         <li>Ogni scheda ha un esempio già pronto per una materia: si può chiedere agli studenti di riscriverlo sulla materia del giorno.</li>
         <li>Funziona anche come consegna per casa: esplorare l'atlante e portare in classe i due metodi scelti.</li>
@@ -535,7 +535,7 @@ const METHODS = [
    example:"Venti parole nuove di inglese. Invece di ripeterle cento volte stasera, ripassale oggi (5 minuti), poi domani, poi fra tre giorni, poi fra una settimana. Ogni volta bastano pochi minuti, ma alla verifica — e anche dopo — le parole ci saranno ancora.",
    steps:["Il giorno che studi, segna sul diario i ripassi: +1, +3, +7 giorni.","Ogni ripasso dura pochi minuti, sempre a libro chiuso.","Se un ripasso va liscio, allunga l'intervallo successivo."],
    action:"Sul diario di oggi, <strong>scrivi già i tre appuntamenti di ripasso</strong> (+1, +3, +7) per la materia che studi stasera.",
-   tool:null},
+   tool:"spaziata"},
 
   {phase:2, id:"recupero", name:"Il Recupero Attivo", forWho:"Per chi rilegge dieci volte e non ricorda",
    img:null,
@@ -553,7 +553,7 @@ const METHODS = [
    example:"Le capitali europee su tante carte (davanti lo Stato, dietro la capitale). Le sbagli sempre → scatola 1, ogni giorno. Quelle che a volte azzecchi → scatola 2. Quelle che sai a colpo sicuro → scatola 3. Sbagli «Oslo»? La carta della Norvegia ritorna subito in scatola 1.",
    steps:["Prepara le carte (domanda davanti, risposta dietro) e tre scatole.","Carta giusta: sale di scatola. Carta sbagliata: torna alla scatola 1.","Ripassa la scatola 1 ogni giorno, la 2 ogni 3 giorni, la 3 ogni settimana."],
    action:"Costruisci <strong>10 flashcard</strong> sull'argomento più «a memoria» di questa settimana e sistemale in tre scatole (bastano tre mucchietti sul tavolo).",
-   tool:null}
+   tool:"leitner"}
 ];
 
 /* ============= RENDER SCHEDE ============= */
@@ -589,6 +589,46 @@ function methodCardHTML(m, index){
             '<div class="fc-face fc-back"><span>Solido, liquido e aeriforme (gassoso). Il passaggio da uno all\'altro dipende da temperatura e pressione.</span></div>' +
           '</div>' +
         '</div>' +
+      '</div>';
+  } else if(m.tool === "sq3r"){
+    toolBlock =
+      '<div class="tool">' +
+        '<div class="tool-lab"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/><circle cx="12" cy="12" r="10"/></svg>Provalo adesso: la fabbrica di domande</div>' +
+        '<p class="hint" style="margin-bottom:8px">Titolo del capitolo: <strong>«La nascita dei Comuni»</strong>. Tocca le frasi che diventerebbero <strong>buone domande di studio</strong> (aperte e precise), poi controlla.</p>' +
+        '<div class="pick-grid" id="sq3rOpts"></div>' +
+        '<div class="btnrow"><button class="btn btn-ind" id="sq3rCheck"><span>Controlla</span></button></div>' +
+        '<div class="tool-fb" id="sq3rFb"></div>' +
+      '</div>';
+  } else if(m.tool === "feynman"){
+    toolBlock =
+      '<div class="tool">' +
+        '<div class="tool-lab"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Provalo adesso: spiega da campione</div>' +
+        '<p class="hint" style="margin-bottom:8px">Spiega la <strong>fotosintesi</strong> come la diresti a un bambino di 6 anni, con parole tue e senza paroloni.</p>' +
+        '<textarea id="feynBox" placeholder="La pianta prende la luce del sole e..."></textarea>' +
+        '<div class="count-lab" id="feynCount">0 parole</div>' +
+        '<div class="btnrow"><button class="btn btn-ind" id="feynCheck"><span>Ho finito di spiegare</span></button></div>' +
+        '<div class="tool-fb" id="feynFb"></div>' +
+      '</div>';
+  } else if(m.tool === "spaziata"){
+    toolBlock =
+      '<div class="tool">' +
+        '<div class="tool-lab"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Provalo adesso: calcola i tuoi ripassi</div>' +
+        '<p class="hint" style="margin-bottom:8px">Scegli il giorno in cui studi: ti calcolo i 3 ripassi da segnare subito sul diario.</p>' +
+        '<div class="spaced-form">' +
+          '<div class="tfield"><label for="spDate">Giorno di studio</label><input type="date" id="spDate"></div>' +
+          '<button class="btn btn-sage" id="spCalc"><span>Calcola i 3 ripassi</span></button>' +
+        '</div>' +
+        '<div class="spaced-out" id="spOut"></div>' +
+        '<div class="btnrow"><button class="btn btn-ghost" id="spCopy" hidden><span>Copia per il diario</span></button><span class="hint" id="spMsg"></span></div>' +
+      '</div>';
+  } else if(m.tool === "leitner"){
+    toolBlock =
+      '<div class="tool">' +
+        '<div class="tool-lab"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4z"/><path d="M3 8v8l9 4 9-4V8"/></svg>Provalo adesso: le tre scatole</div>' +
+        '<p class="hint" style="margin-bottom:8px">Prova a rispondere a mente, poi scopri la capitale. La carta <strong>sale di scatola</strong> se la sapevi, <strong>torna alla 1</strong> se no.</p>' +
+        '<div class="leitner-boxes" id="lBoxes"></div>' +
+        '<div class="lcard" id="lCard"></div>' +
+        '<div class="btnrow" id="lBtns"></div>' +
       '</div>';
   }
   return (
@@ -708,6 +748,161 @@ if(timerStartBtn){
   });
 }
 timerRender();
+
+/* ============= HELPER: testo insensato (italiano) ============= */
+function looksNonsense(text){
+  const vowels="aeiouàèéìòù";
+  const words=text.trim().split(/\s+/).filter(w=>w.length>0);
+  for(const w of words){
+    const lower=w.toLowerCase().replace(/[^a-zàèéìòù]/g,"");
+    if(lower.length<3) continue;
+    let c=0;
+    for(const ch of lower){ if(!vowels.includes(ch)) c++; else c=0; if(c>=4) return true; }
+    if(lower.length>16) return true;
+  }
+  return false;
+}
+
+/* ============= SQ3R: fabbrica di domande ============= */
+const SQ3R_OPTS=[
+  {t:"Quando nascono i Comuni, e perché?", good:true},
+  {t:"Come veniva governato un Comune?", good:true},
+  {t:"Chi poteva far parte del Comune?", good:true},
+  {t:"I Comuni erano una bella cosa?", good:false},
+  {t:"Comuni, pagina 45", good:false}
+];
+const sq3rOpts=document.getElementById("sq3rOpts");
+if(sq3rOpts){
+  SQ3R_OPTS.forEach((o,i)=>{
+    const b=document.createElement("button");
+    b.className="pick"; b.dataset.i=i; b.setAttribute("aria-pressed","false");
+    b.innerHTML='<span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 10 18 20 6"/></svg></span><span>'+o.t+'</span>';
+    b.addEventListener("click", ()=>{ b.classList.toggle("sel"); b.setAttribute("aria-pressed", b.classList.contains("sel")?"true":"false"); });
+    sq3rOpts.appendChild(b);
+  });
+  document.getElementById("sq3rCheck").addEventListener("click", ()=>{
+    const fb=document.getElementById("sq3rFb");
+    const sel=Array.from(sq3rOpts.querySelectorAll(".pick.sel")).map(b=>parseInt(b.dataset.i,10));
+    if(!sel.length){ fb.className="tool-fb show warn"; fb.textContent="Tocca almeno una frase: quali terresti in testa come domande mentre leggi?"; return; }
+    const goodPicked=sel.filter(i=>SQ3R_OPTS[i].good).length;
+    const badPicked=sel.filter(i=>!SQ3R_OPTS[i].good).length;
+    const totalGood=SQ3R_OPTS.filter(o=>o.good).length;
+    if(goodPicked===totalGood && badPicked===0){
+      fb.className="tool-fb show good";
+      fb.textContent="Perfetto: sono tutte domande aperte e precise. Adesso leggi il capitolo cercando proprio queste risposte.";
+    } else if(badPicked>0){
+      fb.className="tool-fb show warn";
+      fb.textContent="Occhio: «I Comuni erano una bella cosa?» chiede solo un sì/no, e «pagina 45» non è una domanda. Le buone domande iniziano con Chi, Come, Quando, Perché.";
+    } else {
+      fb.className="tool-fb show warn";
+      fb.textContent="Quelle che hai preso vanno bene, ma ne manca qualcuna: cerca tutte le frasi che iniziano con Chi, Come, Quando, Perché.";
+    }
+  });
+}
+
+/* ============= FEYNMAN: spiega da campione ============= */
+const feynBox=document.getElementById("feynBox");
+if(feynBox){
+  feynBox.addEventListener("input", ()=>{
+    const w=feynBox.value.trim().split(/\s+/).filter(x=>x).length;
+    document.getElementById("feynCount").textContent=w+(w===1?" parola":" parole");
+  });
+  document.getElementById("feynCheck").addEventListener("click", ()=>{
+    const fb=document.getElementById("feynFb");
+    const w=feynBox.value.trim().split(/\s+/).filter(x=>x).length;
+    if(w<20){
+      fb.className="tool-fb show warn";
+      fb.textContent="Sei a "+w+" parole. Prova ad arrivare a 20-30: se non ti vengono, è il segnale che quel punto va ristudiato — ed è proprio quello che serve scoprire.";
+    } else if(looksNonsense(feynBox.value)){
+      fb.className="tool-fb show warn";
+      fb.textContent="Qualche parola sembra scritta di fretta: rileggi con calma. Spiegare per bene è già metà dello studio.";
+    } else {
+      fb.className="tool-fb show good";
+      fb.textContent="Bravo: se sei riuscito a dirlo con parole tue e semplici, vuol dire che l'hai capito davvero. Questa è la prova del nove.";
+    }
+  });
+}
+
+/* ============= RIPETIZIONE SPAZIATA: calcola i ripassi ============= */
+const spInput=document.getElementById("spDate");
+if(spInput){
+  const pad=n=>String(n).padStart(2,"0");
+  const fmt=d=>pad(d.getDate())+"/"+pad(d.getMonth()+1)+"/"+d.getFullYear();
+  const giorni=["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
+  const today=new Date();
+  spInput.value=today.getFullYear()+"-"+pad(today.getMonth()+1)+"-"+pad(today.getDate());
+  let spText="";
+  document.getElementById("spCalc").addEventListener("click", ()=>{
+    const base = spInput.value ? new Date(spInput.value+"T00:00:00") : new Date();
+    if(isNaN(base.getTime())){ document.getElementById("spMsg").textContent="Scegli prima un giorno."; return; }
+    const out=document.getElementById("spOut");
+    out.innerHTML="";
+    const lines=["I MIEI RIPASSI - studio del "+fmt(base), ""];
+    [1,3,7].forEach(a=>{
+      const d=new Date(base); d.setDate(d.getDate()+a);
+      const div=document.createElement("div"); div.className="rip";
+      div.innerHTML='<span class="rlab">Dopo '+a+' giorn'+(a===1?'o':'i')+'</span><span class="rdate">'+fmt(d)+'</span><span class="rday">'+giorni[d.getDay()]+'</span>';
+      out.appendChild(div);
+      lines.push("Ripasso "+a+" ("+giorni[d.getDay()]+" "+fmt(d)+"): 10 minuti a libro chiuso");
+    });
+    out.classList.add("show");
+    document.getElementById("spCopy").hidden=false;
+    document.getElementById("spMsg").textContent="";
+    spText=lines.join("\n");
+  });
+  document.getElementById("spCopy").addEventListener("click", ()=>{ copyText(spText, document.getElementById("spMsg")); });
+}
+
+/* ============= LEITNER: le tre scatole ============= */
+const lBoxesEl=document.getElementById("lBoxes");
+if(lBoxesEl){
+  const LEITNER=[
+    {q:"Norvegia", a:"Oslo", box:1},
+    {q:"Portogallo", a:"Lisbona", box:1},
+    {q:"Grecia", a:"Atene", box:1},
+    {q:"Austria", a:"Vienna", box:1},
+    {q:"Svezia", a:"Stoccolma", box:1}
+  ];
+  const BOX_META=[{t:"Scatola 1", s:"ogni giorno"},{t:"Scatola 2", s:"ogni 3 giorni"},{t:"Scatola 3", s:"ogni settimana"}];
+  const lCard=document.getElementById("lCard");
+  const lBtns=document.getElementById("lBtns");
+  let lIdx=0, revealed=false, lastMoved=-1;
+  function renderBoxes(){
+    lBoxesEl.innerHTML="";
+    BOX_META.forEach((b,i)=>{
+      const n=LEITNER.filter(c=>c.box===i+1).length;
+      const d=document.createElement("div"); d.className="lbox"+(lastMoved===i+1?" pulse":"");
+      d.innerHTML='<span class="lb-t">'+b.t+'</span><span class="lb-s">'+b.s+'</span><span class="lb-n">'+n+'</span>';
+      lBoxesEl.appendChild(d);
+    });
+  }
+  function renderCard(){
+    const c=LEITNER[lIdx];
+    lCard.innerHTML='<span class="lc-q">Qual è la capitale di <strong>'+c.q+'</strong>?</span><span class="lc-a" id="lAns">'+c.a+'</span>';
+    lBtns.innerHTML="";
+    if(!revealed){
+      const b=document.createElement("button"); b.className="btn btn-sage"; b.innerHTML="<span>Mostra la capitale</span>";
+      b.addEventListener("click", ()=>{ revealed=true; document.getElementById("lAns").classList.add("show"); renderAssess(); });
+      lBtns.appendChild(b);
+    } else renderAssess();
+  }
+  function renderAssess(){
+    lBtns.innerHTML="";
+    const ok=document.createElement("button"); ok.className="btn btn-sage"; ok.innerHTML="<span>La sapevo</span>";
+    const no=document.createElement("button"); no.className="btn btn-ghost"; no.innerHTML="<span>Non la sapevo</span>";
+    ok.addEventListener("click", ()=>advance(true));
+    no.addEventListener("click", ()=>advance(false));
+    lBtns.appendChild(ok); lBtns.appendChild(no);
+  }
+  function advance(knew){
+    const c=LEITNER[lIdx];
+    c.box = knew ? Math.min(3, c.box+1) : 1;
+    lastMoved=c.box;
+    revealed=false; lIdx=(lIdx+1)%LEITNER.length;
+    renderBoxes(); renderCard();
+  }
+  renderBoxes(); renderCard();
+}
 
 /* ============= NAV RAPIDA ============= */
 document.querySelectorAll("#jumpPills .jpill").forEach(b=>{
